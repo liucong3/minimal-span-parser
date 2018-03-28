@@ -159,7 +159,7 @@ def run_train(args):
                 args.model_path_base, dev_fscore.fscore)
             print("Saving new best model to {}...".format(best_dev_model_path))
             # dy.save(best_dev_model_path, [parser])
-            torch.save(best_dev_model_path, parser)
+            torch.save(parser, best_dev_model_path)
 
     for epoch in itertools.count(start=1):
         if args.epochs is not None and epoch > args.epochs:
