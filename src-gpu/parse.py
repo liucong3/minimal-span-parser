@@ -178,7 +178,6 @@ class TopDownParser(nn.Module):
                                 -1)
         # lstm_outputs = self.lstm.transduce(embeddings)
         lstm_outputs, _ = self.lstm(embeddings)
-        lstm_outputs = lstm_outputs
 
         self.trees = []
         losses = []
