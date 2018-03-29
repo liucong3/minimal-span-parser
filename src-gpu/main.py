@@ -197,9 +197,11 @@ def run_train(args):
             batch_loss = batch_losses.mean()
             assert batch_loss.data.numel() == 1
             batch_loss_value = batch_loss.data[0]
-            batch_loss.backward()
+
             # trainer.update()
-            optimizer.step()
+            if not batch_loss.requires_grad:
+                batch_loss.backward()
+                optimizer.step()
 
             print(
                 "epoch {:,} "
@@ -311,6 +313,7 @@ def main():
     subparser.add_argument("--model-path-base", required=True)
     subparser.add_argument("--evalb-dir", default="EVALB/")
     subparser.add_argument("--test-path", default="data/23.auto.clean")
+    subparser.add_argument("--gpu", type=int, default=0)
 
     args = parser.parse_args()
     if torch.cuda.is_available():

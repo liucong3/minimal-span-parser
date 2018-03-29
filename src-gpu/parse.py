@@ -187,7 +187,7 @@ class TopDownParser(nn.Module):
                             self.training, 
                             lstm_outputs[:,i,:], 
                             self.sentences[i],
-                            self.gold_trees[i], 
+                            self.gold_trees[i] if self.gold_trees is not None else None, 
                             self.explore)
             self.trees.append(tree)
             losses.append(loss)
