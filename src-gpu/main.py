@@ -199,7 +199,7 @@ def run_train(args):
             batch_loss_value = batch_loss.data[0]
 
             # trainer.update()
-            if not batch_loss.requires_grad:
+            if batch_loss.requires_grad:
                 batch_loss.backward()
                 optimizer.step()
 
